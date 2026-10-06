@@ -1,111 +1,178 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+/* ---------- Tailwind ---------- */
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@import "tailwindcss";
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+/* ---------- Fonts ---------- */
+
+@font-face {
+  font-family: "Harryp";
+  src: url("/fonts/HarryP.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Caslon Antique";
+  src: url("/fonts/CaslonAntique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ---------- Dark Mode ---------- */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* ================================
+   COLOR SYSTEM + FONTS
+   ================================ */
+
+@theme {
+
+  /* ---- Core Brand Colors ---- */
+
+  --color-burgundy: #66081A;
+  --color-gold: #CF9A22;
+
+  --color-forest: #11472F;
+  --color-gray: #89888D;
+
+  --color-navy: #0B304A;
+  --color-bronze: #A57A55;
+
+  --color-amber: #C9942A;
+  --color-black: #050208;
+
+
+  /* ---- Semantic Colors ---- */
+
+  --color-background: #050208;
+  --color-foreground: #F5EBD7;
+
+  --color-primary: #66081A;
+  --color-secondary: #CF9A22;
+
+  --color-accent: #C9942A;
+
+  --color-section: #0B304A;
+  --color-card: #11472F;
+
+  --color-muted: #89888D;
+  --color-border: #A57A55;
+
+
+  /* ---- Typography ----
+     These also generate the classes font-heading and font-body */
+
+  --font-heading: "Harryp", serif;
+  --font-body: "Caslon Antique", serif;
+}
+
+
+/* ================================
+   BASE
+   ================================ */
+
+@layer base {
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Form controls use the font of their surroundings */
+  button,
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-background);
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+/* ================================
+   CUSTOM COMPONENTS
+   (in the components layer so Tailwind utilities can override them)
+   ================================ */
+
+@layer components {
+
+  /* ---- Wave dividers ---- */
+
+  .custom-shape-divider-top,
+  .custom-shape-divider-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .custom-shape-divider-top {
+    top: 0;
   }
-}
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  .custom-shape-divider-bottom {
+    bottom: 0;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  .custom-shape-divider-top svg,
+  .custom-shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(150% + 1.3px);
+    height: 70px;
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  .custom-shape-divider-top .shape-fill,
+  .custom-shape-divider-bottom .shape-fill {
+    fill: var(--color-background);
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+
+  /* ---- Magical decoration ---- */
+
+  .magic-border {
+    border: 1px solid var(--color-gold);
+  }
+
+  .magic-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-gold),
+      var(--color-bronze),
+      var(--color-gold),
+      transparent
+    );
+  }
+
+  .magic-glow {
+    box-shadow:
+      0 0 15px rgba(207, 154, 34, 0.15),
+      0 0 40px rgba(102, 8, 26, 0.12);
+  }
 }
