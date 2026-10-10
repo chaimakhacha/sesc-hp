@@ -176,3 +176,24 @@
       0 0 40px rgba(102, 8, 26, 0.12);
   }
 }
+/* ---------- Welcome Day visual polish ---------- */
+@layer components {
+  .hp-hero { isolation: isolate; background: #08070d; }
+  .hp-hero-image { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: center 38%; opacity: .62; transform: scale(1.02); }
+  .hp-hero-vignette { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5,2,8,.86), rgba(5,2,8,.5) 48%, rgba(5,2,8,.75)), linear-gradient(0deg, #050208 0%, transparent 35%, rgba(5,2,8,.18)); }
+  .hp-hero::after { content: "✦"; position: absolute; top: 22%; left: 9%; color: rgba(207,154,34,.55); font-size: 1.4rem; text-shadow: 0 0 18px rgba(207,154,34,.65); animation: hp-twinkle 3s ease-in-out infinite; }
+  .hp-button { display: inline-block; border: 1px solid var(--color-gold); transition: transform .25s ease, background .25s ease, box-shadow .25s ease; }
+  .hp-button:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(207,154,34,.22); }
+  .hp-button-primary { background: var(--color-primary); color: var(--color-foreground); }
+  .hp-button-primary:hover { background: var(--color-burgundy); color: var(--color-gold); }
+  .hp-button-outline { background: rgba(5,2,8,.3); color: var(--color-gold); backdrop-filter: blur(4px); }
+  .hp-button-outline:hover { background: var(--color-gold); color: var(--color-black); }
+  .hp-house-dot { width: .75rem; height: .75rem; border-radius: 9999px; box-shadow: 0 0 14px currentColor; }
+  .hp-feature-card { background: radial-gradient(ellipse at top, rgba(207,154,34,.12), transparent 60%), rgba(5,2,8,.8); }
+  .hp-program { background-image: linear-gradient(rgba(11,48,74,.93), rgba(5,2,8,.97)), url('/src/assets/moon-clouds.jfif'); background-size: cover; background-position: center; }
+  .hp-quote { background-image: linear-gradient(110deg, rgba(54,5,18,.96), rgba(102,8,26,.86)), url('/src/assets/blue-castle.jfif'); background-size: cover; background-position: center 45%; }
+  .hp-department-card { min-height: 270px; background-image: linear-gradient(145deg, rgba(5,2,8,.22), rgba(5,2,8,.72)); box-shadow: inset 0 0 40px rgba(0,0,0,.18); }
+  .hp-department-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.28), 0 0 25px rgba(207,154,34,.12); }
+}
+@keyframes hp-twinkle { 0%, 100% { opacity: .45; transform: scale(.9) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(20deg); } }
+@media (prefers-reduced-motion: reduce) { .hp-hero::after { animation: none; } .hp-button { transition: none; } }
